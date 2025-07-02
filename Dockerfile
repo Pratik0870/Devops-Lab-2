@@ -1,12 +1,25 @@
-FROM python:3.11
+# Use Python 3.10 image
+FROM python:3.10-slim
 
-LABEL version="1.0"
-LABEL description="My Docker Image"
+# Add label for student and lab number
+LABEL student="Amaan Patel"
+LABEL lab="Lab 2"
 
+# Build ARG for environment
+ARG ENV=development
+ENV ENV=$ENV
+
+# Set working directory
 WORKDIR /app
-COPY . /app
-RUN pip install -r requirements.txt
 
-EXPOSE 8000 
+# Copy files and install dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-CMD ["python", "app.py"]
+COPY . .
+
+# Print environment when container starts
+CMD echo "Starting in $ENV environment" && python main.py
+
+# Expose the Flask port
+EXPOSE 8000
