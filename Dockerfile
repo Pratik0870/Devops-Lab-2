@@ -2,7 +2,7 @@
 FROM python:3.10-slim
 
 # Add label for student and lab number
-LABEL student="Amaan Patel"
+LABEL student="Pratik Patil"
 LABEL lab="Lab 2"
 
 # Build ARG for environment
